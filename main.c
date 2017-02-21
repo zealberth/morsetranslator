@@ -51,20 +51,60 @@ const char * morse(int c)
 	else return "?";
 }
 
+void mostraMorse()
+{
+    int cont;
+
+    for (cont = 48; cont <= 57; cont++)
+    {
+        printf ("- %c = %s\n", cont, morse(cont));
+    }
+    printf("\n");
+    for (cont = 65; cont <= 90; cont++)
+    {
+        printf ("- %c = %s\n", cont, morse(cont));
+    }
+    printf("\n");
+    printf ("- %c = %s\n", 44, morse(44));
+    printf ("- %c = %s\n", 46, morse(46));
+    printf ("- SPC = %s\n\n", morse(32));
+}
+
+void salvaTxt(const char *nomeArquivo, const char *str)
+{
+    FILE *fp = fopen(nomeArquivo, "w");
+    if (fp != NULL)
+    {
+        int i = 0;
+        while(str[i])
+        {
+            fprintf(fp, "%s ", morse(str[i]));
+            i++;
+        }
+        fclose(fp);
+    }
+}
+
+
 int main()
 {
 	char str[200];
 	int i = 0;
+
 	printf("Enter your string: ");
 	scanf("%[^\t\n]s",str);
 	printf("\n\n");
-	//getch();
+
+	getch();
+
 	while(str[i])
-   {
-      	printf("%s ", morse(str[i]));
+    {
+        printf("%s ", morse(str[i]));
       	i++;
-   }
+    }
 
-	return(1);
+    //mostraMorse();
+    //salvaTxt("teste.txt", str);
 
+    return(1);
 }
